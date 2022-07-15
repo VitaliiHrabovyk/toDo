@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="main">
+        <h1 class="title is-4 has-text-centered">ToDo APP</h1>
+        <form class="add-todo-form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="columns is-mobile">
+            <div class="column is-my-size">
+                <input class="input is-small" type="text" placeholder="add to do" formControlName="text">
+            </div>
+            
+            <div class="column">
+                <p class="control">
+                    <button class="button is-info is-small" id="add-button" type="submit" [disabled]="form.invalid">
+                      <span class="material-symbols-outlined">add</span>
+                    </button>
+                  </p>
+            </div>
+        </div>
+
+        </form>
+
+        
+
+
+        <div class="columns is-mobile" *ngFor="let todo of toDosServ.toDos">
+            <div class="column is-my-size">
+                <details>
+                    <summary>
+                        <div class="tag-text">
+                           {{todo.text}}           
+                        </div>
+        
+                    </summary>
+                    <div class="todo-text"> {{todo.text}}</div>
+                  </details>
+
+            </div>
+            
+            <div class="column" (click)="toDosServ.deleteToDo(todo.key)">
+                <div class="tag-button">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+
+            </div>
+        </div>
+    
+        
+
+        <hr>
+        <div class="columns is-mobile clear-all-columns">
+            <div class="column is-two-thirds">
+                <p *ngIf="toDosServ.toDos.length" class="todo-count">You have <b>{{toDosServ.toDos.length}}</b> tasks to do</p>
+                <p *ngIf="!toDosServ.toDos.length" class="todo-count">No task to do</p>
+            </div>
+            <div class="column has-text-right">
+                <button class="button is-info" id="clear-all" (click)="toDosServ.clearAll()">Clear all</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
